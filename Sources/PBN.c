@@ -21,7 +21,6 @@ void constroi_matriz(int matriz[N][N], char *nome_arquivo) {
 
   while (fscanf(arq, "%s", valor_lido) != EOF) {
     
-      printf("\ncaractere lido: |%s| na linha: %i\n ", valor_lido, linha);
   
     inclui_aresta(linha, valor_lido, matriz);
 
@@ -82,8 +81,7 @@ int atualiza_vetor(int *k, int *vetor) {
   // avalia tamanho do binario
   if (num > (pow(2, N) - 1)) {
     
-    printf("Possibilidade binaria maior que a suportada pelo vetor(todas as "
-           "possibilidades foram testadas)\n");
+    printf("\nTodas as possibilidades foram testadas\n");
     return 1;
   }
 

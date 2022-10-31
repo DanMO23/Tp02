@@ -26,8 +26,8 @@ int main() {
         printf("%d", vetor_binario[z]);
       printf("\n");
       
-      imprime_matriz(matriz_adjacente);
-      exit(0);
+      
+      
     }
     marca_fim = atualiza_vetor(&k, &vetor_binario[0]);
   }
@@ -35,6 +35,6 @@ int main() {
   
   
   imprime_matriz(matriz_adjacente);
-  printf("Nao ha solucao\n\n");
+  
   return 0;
 }
