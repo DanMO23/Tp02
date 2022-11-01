@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <time.h>
 #include "../Headers/PBN.h"
 
 
@@ -11,7 +12,7 @@ void constroi_matriz(int matriz[N][N], char *nome_arquivo) {
   int cont = 0;
   char sep;
   char valor_lido[3];
-
+  
   arq = fopen(nome_arquivo, "r");
 
   if (arq == NULL) {
