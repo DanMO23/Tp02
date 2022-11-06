@@ -6,7 +6,7 @@
 
 /*
 void constroi_matriz
-//gasto total da funcao = 9n + 1
+//gasto total da funcao = melhor caso = 3n + 1. Pior caso = 3n(n-1) + 1
 
 void inicia_matriz
 //gasto total da funcao = n^2
@@ -21,8 +21,9 @@ int atualiza_vetor
 //gasto total da funcao = 1
 
 int verifica_sequencia
-//gasto total da funcao = pior caso: 3n^2 . Melhor caso = 3n
+//gasto total da funcao = pior caso: 3n^2 - n. Melhor caso =  3n - n = 2n
 
+//Obs.: Note que o caso que gera o pior caso para a funcao constroi_matriz tambem é o pior caso para a funcao verifica sequencia.(ver PNB.c)
 */
 
 int main() {
@@ -34,7 +35,7 @@ int main() {
   scanf("%s", nome_arquivo);
   t = clock(); //armazena tempo
   inicia_matriz(matriz_adjacente); //************************************* gasto total da funcao = n^2
-  constroi_matriz(matriz_adjacente, nome_arquivo); //********************* gasto total da funcao = 9n + 1
+  constroi_matriz(matriz_adjacente, nome_arquivo); //********************* gasto total da funcao = melhor caso = 3n + 1. Pior caso = 3n(n-1) + 1
 
   printf("\nNumero de possibilidades: %.0lf\n\n", pow(2, N));
 
@@ -51,7 +52,7 @@ int main() {
     Sendo num o valor de da variavel k. Alem disso, essa funcao esta sempre aumentando k em 1. Como k comeca como 1 no while e o parametro de parada do if é num(que é igual a k) ser igual maior a 2^N - 1, o while repetirá 2^N vezes.
 
     */
-    achou = verifica_sequencia(vetor_binario, matriz_adjacente); //***** gasto total da funcao = pior caso: 3n^2 . Melhor caso = 3n
+    achou = verifica_sequencia(vetor_binario, matriz_adjacente); //gasto total da funcao = pior caso: 3n^2 - n. Melhor caso =  3n - n = 2n
 
     if (achou) { // **************************************************** gasto 1
       printf("Foi encontrada uma solucao valida\n");
@@ -74,16 +75,24 @@ int main() {
 }
 
 /*
-Somatório dos gastos: 
+Conclusoes sobre a complexidade
+
+Melhor caso:
 n^2 (inicia_matriz) +
-9n + 1 (constroi_matriz) +
+3n + 1 (melhor caso do constroi_matriz) +
 1 (atualiza_vetor) +
-2^n * (3(n^2)(para pior caso do verifica_sequencia) + 1(if) + 1(atualiza_vetor))(referente a parte do while)
+2^n * (2n(para melhor caso do verifica_sequencia) + 1(if) + 1(atualiza_vetor))(referente a parte do while)
 
-= n^2 + 9n + 1 + ((2^n)*(3n^2 + 1 + 1))
+Logo, temos n^2 + 3n + 1 + 1 + 2^n(2n + 1 + 1 ) 
+= 2^n(2n + 2 ) + n^2 + 3n + 2
 
-= (2^n)*(3(n^2)) + 2*2^n + n^2 + 9n + 1
+Pior caso:
+n^2 (inicia_matriz) +
+3n(n-1) + 1 (pior caso do constroi_matriz) +
+1 (atualiza_vetor) +
+2^n * (3n^2 - n(para pior caso do verifica_sequencia) + 1(if) + 1(atualiza_vetor))(referente a parte do while)
 
-= (2^n)*(3(n^2)) + 2^(n+1) + n^2 + 9n + 1
+Logo, temos n^2 + 3n(n-1) + 1 + 1 + 2^n(3n^2 - n + 1 + 1 )
+= 2^n(3n^2 - n + 2 ) + n^2 + 3n(n-1) + 2
 
 */

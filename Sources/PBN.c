@@ -20,9 +20,12 @@ void constroi_matriz(int matriz[N][N], char *nome_arquivo) {
     exit(1);
   }
 
-  while (fscanf(arq, "%s", valor_lido) != EOF) { //***** entre n e n^2. Como não há como saber a combinação da entrada, considerarei um caso onde todas as bolinhas fazem contato com duas bolinha, ou seja, cada linha terá tres dados e consequentemente o while será executado 3n vezes
+  while (fscanf(arq, "%s", valor_lido) != EOF) { 
+  /*
+  Observe o seguinte: o melhor caso é quando a linha contem apenas o valor da bolinha. Isso significa que a bolinha nao faz conxoes com ninguem, resultando numa complexidade n.
+  Ja o pior caso é quando todas as bolinhas estao conectadas (Algo que tambem resulta no pior caso para a funçao verifica_sequencia). Nesse caso, cada bolinha faz conexoes com n-1 bolinhas. Como o arquivo tem uma linha para cada bolinha, o while repetirá n(n-1) vezes.
     
-  
+  */
     inclui_aresta(linha, valor_lido, matriz); // ****** gasto 1
 
     sep = fgetc(arq);
@@ -33,9 +36,9 @@ void constroi_matriz(int matriz[N][N], char *nome_arquivo) {
     if (sep == EOF) { //******************************* gasto 1
       break;
     }
-  } // gasto total do while = 3*(3n) = 9n
+  } // gasto total do while = melhor caso = 3n. Pior caso = 3n(n-1)
 }
-//gasto total da funcao = 9n + 1
+//gasto total da funcao = melhor caso = 3n + 1. Pior caso = 3n(n-1) + 1
 
 void inicia_matriz(int matriz[N][N]) {
   int i, j;
@@ -129,6 +132,13 @@ int verifica_sequencia(int vetor_binario[N], int matriz_adjacente[N][N]) {
   int i, j, z;
   for (i = 0; i < N; i++) { //repete n vezes
     for (j = 0; j < N; j++) { //repete n vezes
+
+    /*
+    Perceba o seguinte: o pior caso será quando a linha de execucao executa todos os 3 ifs. 
+    Primeiramente: independente da formula de complexidade dessa funcao, podemos garantir que todas as linhas terao um caso onde somente o primeiro if é executado. 
+    Em segundo lugar: a unica forma de (tirando a excecao mostrada no item anterior) a linha de execucao entrar nos dois ifs é se todo item da matriz_adjacente, com exceçao dos da diagonal principal, for 1. Logo, temos 3*n^2 que representa o pior caso. Subtraindo dos n casos onde i == j, temos 3n^2 - n. Ja o melhor caso é quando todos os itens da matriz sao 0. Logo, temos 3n - n = 2n.
+    */
+
       if (i != j) {  //**********************************gasto 1
         if (matriz_adjacente[i][j] == 
           1) { // Procura dentro da matriz quais elementos são adjacentes
@@ -147,18 +157,18 @@ int verifica_sequencia(int vetor_binario[N], int matriz_adjacente[N][N]) {
             return 0;
           }
         }
-      }// o melhor caso é onde sai do if de primeira, e o pior é quando entra nos dois 3 ifs, resultando gasto 3
-    }// gasto = melhor caso: n. Pior caso: 3n
-  }//gasto = melhor caso: n*(n) = n^2. Pior caso: n*(3n) = 3n^2
+      }
+    }
+  }//gasto = melhor caso:  3n - n = 2n. Pior caso: 3n^2 - n
   return 1;
 }
-//gasto total da funcao = pior caso: 3n^2 . Melhor caso = 3n
+//gasto total da funcao = pior caso: 3n^2 - n. Melhor caso =  3n - n = 2n
 
-
+//Obs.: Note que o caso que gera o pior caso para a funcao constroi_matriz tambem é o pior caso para a funcao verifica sequencia.
 
 /*
 void constroi_matriz
-//gasto total da funcao = 9n + 1
+//gasto total da funcao = melhor caso = 3n + 1. Pior caso = 3n(n-1) + 1
 
 void inicia_matriz
 //gasto total da funcao = n^2
@@ -173,6 +183,6 @@ int atualiza_vetor
 //gasto total da funcao = 1
 
 int verifica_sequencia
-//gasto total da funcao = pior caso: 3n^2 . Melhor caso = 3n
+//gasto total da funcao = pior caso: 3n^2 - n. Melhor caso =  3n - n = 2n
 
 */
