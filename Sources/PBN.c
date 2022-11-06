@@ -97,12 +97,10 @@ int atualiza_vetor(int *k, int *vetor) {
   // inicia vetor vazio(decimal = 0)
   for (i = 0; i < N; i++) { // *************** como nao ha ifs dentro do for, nao ha gasto
     *(vetor + i) = 0;
-    // printf("%d",vetor[i]);
+ 
   }
 
-  // valor atual de k:
-  // printf("Valor atual de k: %d\n",num);
-
+  
   i = 0;
   while (num > 0) { // *************************gasto = como nao ha condicionais dentro do loop, gasto = 0
     // obtém o resto da divisão de num por 2
@@ -111,15 +109,7 @@ int atualiza_vetor(int *k, int *vetor) {
     num = num / 2;
   }
 
-  // vetor preenchido em binario
-
-  /*
-  printf("Vetor preenchido em binario\n");
-  for (i = 0; i<N; i++){
-    printf("%d",vetor[i]);
-  }
-  printf("\n\n");
-  */
+ 
 
   // atualiza o valor k para a proxima repetiçao (para o vetor ser preenchido
   // corretamente)
@@ -135,8 +125,13 @@ int verifica_sequencia(int vetor_binario[N], int matriz_adjacente[N][N]) {
 
     /*
     Perceba o seguinte: o pior caso será quando a linha de execucao executa todos os 3 ifs. 
-    Primeiramente: independente da formula de complexidade dessa funcao, podemos garantir que todas as linhas terao um caso onde somente o primeiro if é executado. 
-    Em segundo lugar: a unica forma de (tirando a excecao mostrada no item anterior) a linha de execucao entrar nos dois ifs é se todo item da matriz_adjacente, com exceçao dos da diagonal principal, for 1. Logo, temos 3*n^2 que representa o pior caso. Subtraindo dos n casos onde i == j, temos 3n^2 - n. Ja o melhor caso é quando todos os itens da matriz sao 0. Logo, temos 3n - n = 2n.
+    Primeiramente: independente da formula de complexidade dessa funcao, podemos garantir que
+     todas as linhas terao um caso onde somente o primeiro if é executado. 
+    Em segundo lugar: a unica forma de (tirando a excecao mostrada no item anterior) a linha de 
+    execucao entrar nos dois ifs é se todo item da matriz_adjacente, 
+    com exceçao dos da diagonal principal, for 1. Logo, temos 3*n^2 que representa o pior caso. 
+    Subtraindo dos n casos onde i == j, temos 3n^2 - n. 
+    Ja o melhor caso é quando todos os itens da matriz sao 0. Logo, temos 3n - n = 2n.
     */
 
       if (i != j) {  //**********************************gasto 1
@@ -146,14 +141,7 @@ int verifica_sequencia(int vetor_binario[N], int matriz_adjacente[N][N]) {
           if (vetor_binario[i] ==
               vetor_binario[j]) { // Compara de acordo com a matriz se as cores
                                   // são iguais em lados adjacentes
-            /*
-            //*************************************gasto 1
-            printf("Posicao i = %d e j = %d:\n", i, j);
-            for (z = 0; z < N; z++)
-              printf("%d", vetor_binario[z]);
-            printf("\n");
-            printf("A permutacao acima falha\n\n");
-            */
+           
             return 0;
           }
         }

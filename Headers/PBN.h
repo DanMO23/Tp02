@@ -1,4 +1,4 @@
-#define N 31
+#define N 10
 
 
 void inicia_matriz(int matriz[N][N]);
